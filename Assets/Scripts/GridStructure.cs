@@ -6,6 +6,11 @@ public class GridStructure
 {
     private int cellSize;
 
+    public GridStructure(int cellSize)
+    {
+        this.cellSize = cellSize;
+    }
+
     public Vector3 CalculateGridPosition(Vector3 inputPosition)
     {
         int x = Mathf.FloorToInt((float)inputPosition.x / cellSize);
