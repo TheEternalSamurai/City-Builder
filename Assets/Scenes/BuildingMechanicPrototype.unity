@@ -536,7 +536,7 @@ PrefabInstance:
     - target: {fileID: 7234471165000494945, guid: eb10a05dac2dd734f9ed0957b50fcc3f,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -9.829834
+      value: -9.829895
       objectReference: {fileID: 0}
     - target: {fileID: 7234471165000494945, guid: eb10a05dac2dd734f9ed0957b50fcc3f,
         type: 3}
@@ -702,9 +702,6 @@ MonoBehaviour:
   mouseInputMask:
     serializedVersion: 2
     m_Bits: 512
-  buildingPrefab: {fileID: 3835052371829837180, guid: 4b6e477301f37f842b7c808fd37bc891,
-    type: 3}
-  cellSize: 3
 --- !u!4 &595151814
 Transform:
   m_ObjectHideFlags: 0
