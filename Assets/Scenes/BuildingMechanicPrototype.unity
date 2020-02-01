@@ -144,7 +144,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 279573320}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1521842153}
@@ -351,22 +351,22 @@ PrefabInstance:
     - target: {fileID: 6547036365401635386, guid: eb10a05dac2dd734f9ed0957b50fcc3f,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 20
+      value: 350
       objectReference: {fileID: 0}
     - target: {fileID: 6547036365401635386, guid: eb10a05dac2dd734f9ed0957b50fcc3f,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6547036365401635386, guid: eb10a05dac2dd734f9ed0957b50fcc3f,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6547036365401635386, guid: eb10a05dac2dd734f9ed0957b50fcc3f,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -20
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6547036365401635386, guid: eb10a05dac2dd734f9ed0957b50fcc3f,
         type: 3}
@@ -441,22 +441,22 @@ PrefabInstance:
     - target: {fileID: 6547036364236748794, guid: eb10a05dac2dd734f9ed0957b50fcc3f,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 20
+      value: 350
       objectReference: {fileID: 0}
     - target: {fileID: 6547036364236748794, guid: eb10a05dac2dd734f9ed0957b50fcc3f,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6547036364236748794, guid: eb10a05dac2dd734f9ed0957b50fcc3f,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6547036364236748794, guid: eb10a05dac2dd734f9ed0957b50fcc3f,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -30
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6547036364236748794, guid: eb10a05dac2dd734f9ed0957b50fcc3f,
         type: 3}
@@ -702,6 +702,9 @@ MonoBehaviour:
   mouseInputMask:
     serializedVersion: 2
     m_Bits: 512
+  buildingPrefab: {fileID: 3835052371829837180, guid: 4b6e477301f37f842b7c808fd37bc891,
+    type: 3}
+  cellSize: 3
 --- !u!4 &595151814
 Transform:
   m_ObjectHideFlags: 0
