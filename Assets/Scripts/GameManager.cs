@@ -23,10 +23,16 @@ public class GameManager : MonoBehaviour
         inputManager = FindObjectsOfType<MonoBehaviour>().OfType<IInputManager>().FirstOrDefault();
         grid = new GridStructure(cellSize, width, length);
         inputManager.AddListenerOnPointerDownEvent(HandleInput);
-        inputManager.AddListenerOnPointerSecondDownEvent(HandleInputCameraPan);
+        inputManager.AddListenerOnPointerSecondChangeEvent(HandleInputCameraPan);
         inputManager.AddListenerOnPointerSecondUpEvent(HandleInputCameraPanStop);
+        inputManager.AddListenerOnPointerChangeEvent(HandlePointerChange);
         uiController.AddListenerOnBuildAreaEvent(StartPlacementMode);
         uiController.AddListenerOnCancleActionEvent(CancleAction);
+    }
+
+    private void HandlePointerChange(Vector3 position)
+    {
+        Debug.Log(position);
     }
 
     private void HandleInputCameraPanStop()
