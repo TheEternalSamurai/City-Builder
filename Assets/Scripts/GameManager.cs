@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public PlacementManager placementManager;
     public IInputManager inputManager;
     public UIController uiController;
+    public CameraMovement cameraMovement;
     public int width, length;
 
     private GridStructure grid;
@@ -18,11 +19,27 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        cameraMovement.SetCameraBounds(0, width, 0, length);
         inputManager = FindObjectsOfType<MonoBehaviour>().OfType<IInputManager>().FirstOrDefault();
         grid = new GridStructure(cellSize, width, length);
         inputManager.AddListenerOnPointerDownEvent(HandleInput);
+        inputManager.AddListenerOnPointerSecondDownEvent(HandleInputCameraPan);
+        inputManager.AddListenerOnPointerSecondUpEvent(HandleInputCameraPanStop);
         uiController.AddListenerOnBuildAreaEvent(StartPlacementMode);
         uiController.AddListenerOnCancleActionEvent(CancleAction);
+    }
+
+    private void HandleInputCameraPanStop()
+    {
+        cameraMovement.StopCameraMovement();
+    }
+
+    private void HandleInputCameraPan(Vector3 position)
+    {
+        if (!buildingModeActive)
+        {
+            cameraMovement.MoveCamera(position);
+        }
     }
 
     // Update is called once per frame
