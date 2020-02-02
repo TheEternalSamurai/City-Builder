@@ -1121,7 +1121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   placementManager: {fileID: 1343114550}
-  inputManager: {fileID: 595151813}
+  uiController: {fileID: 689245694}
   width: 100
   length: 100
 --- !u!4 &1222349627
