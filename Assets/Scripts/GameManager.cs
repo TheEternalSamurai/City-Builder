@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public PlacementManager placementManager;
     public InputManager inputManager;
+    public int width, length;
 
     private GridStructure grid;
     private int cellSize = 3;
@@ -14,7 +15,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        grid = new GridStructure(cellSize);
+        grid = new GridStructure(cellSize, width, length);
         inputManager.AddListenerOnPointerDownEvent(HandleInput);
     }
 
@@ -26,6 +27,10 @@ public class GameManager : MonoBehaviour
 
     private void HandleInput(Vector3 position)
     {
-        placementManager.CreateBuilding(grid.CalculateGridPosition(position));
+        Vector3 gridPosition = grid.CalculateGridPosition(position);
+        if (!grid.IsCellTaken(gridPosition))
+        {
+            placementManager.CreateBuilding(gridPosition, grid);
+        }
     }
 }
