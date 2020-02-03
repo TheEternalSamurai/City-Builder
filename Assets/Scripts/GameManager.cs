@@ -14,14 +14,27 @@ public class GameManager : MonoBehaviour
 
     private GridStructure grid;
     private int cellSize = 3;
-    private bool buildingModeActive = false;
 
-    // Start is called before the first frame update
+    private PlayerState state;
+
+    public PlayerSelectionState selectionState;
+    public PlayerBuildingSingleStructureState buildingSingleStructureState;
+
+    public PlayerState State { get => state; }
+
+    private void Awake()
+    {
+        grid = new GridStructure(cellSize, width, length);
+        selectionState = new PlayerSelectionState(this, cameraMovement);
+        buildingSingleStructureState = new PlayerBuildingSingleStructureState(this, placementManager, grid);
+        state = selectionState;
+    }
+    
     void Start()
     {
         cameraMovement.SetCameraBounds(0, width, 0, length);
         inputManager = FindObjectsOfType<MonoBehaviour>().OfType<IInputManager>().FirstOrDefault();
-        grid = new GridStructure(cellSize, width, length);
+        
         inputManager.AddListenerOnPointerDownEvent(HandleInput);
         inputManager.AddListenerOnPointerSecondChangeEvent(HandleInputCameraPan);
         inputManager.AddListenerOnPointerSecondUpEvent(HandleInputCameraPanStop);
@@ -32,44 +45,37 @@ public class GameManager : MonoBehaviour
 
     private void HandlePointerChange(Vector3 position)
     {
-        Debug.Log(position);
+        state.OnInputPointerChange(position);
     }
 
     private void HandleInputCameraPanStop()
     {
-        cameraMovement.StopCameraMovement();
+        state.OnInputPanUp();
     }
 
     private void HandleInputCameraPan(Vector3 position)
     {
-        if (!buildingModeActive)
-        {
-            cameraMovement.MoveCamera(position);
-        }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        state.OnInputPanChange(position);
     }
 
     private void StartPlacementMode()
     {
-        buildingModeActive = true;
+        TransistionToState(buildingSingleStructureState);
     }
 
     private void CancleAction()
     {
-        buildingModeActive = false;
+        state.OnCancle();
     }
 
     private void HandleInput(Vector3 position)
     {
-        Vector3 gridPosition = grid.CalculateGridPosition(position);
-        if (buildingModeActive && !grid.IsCellTaken(gridPosition))
-        {
-            placementManager.CreateBuilding(gridPosition, grid);
-        }
+        state.OnInputPointerDown(position);
+    }
+
+    public void TransistionToState(PlayerState newState)
+    {
+        this.state = newState;
+        this.state.EnterState();
     }
 }

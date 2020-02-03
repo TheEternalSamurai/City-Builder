@@ -12,18 +12,12 @@ public class UIController : MonoBehaviour
 
     private Action OnBuildAreaHandler;
     private Action OnCancleActionHandler;
-    // Start is called before the first frame update
+    
     void Start()
     {
         cancleActionPanel.SetActive(false);
         buildResidentialAreaBtn.onClick.AddListener(OnBuildAreaCallback);
         cancleActionBtn.onClick.AddListener(OnCancleActionCallback);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void OnBuildAreaCallback()

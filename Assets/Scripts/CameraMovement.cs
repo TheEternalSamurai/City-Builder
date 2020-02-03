@@ -8,18 +8,6 @@ public class CameraMovement : MonoBehaviour
     public float cameraMovementSpeed = 0.05f;
     private int cameraXMin, cameraXMax, cameraZMin, cameraZMax;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void MoveCamera(Vector3 pointerPosition)
     {
         if (!basePointerPosition.HasValue)
