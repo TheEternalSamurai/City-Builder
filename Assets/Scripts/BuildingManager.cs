@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,6 +20,15 @@ public class BuildingManager
         if (!grid.IsCellTaken(gridPosition))
         {
             placementManager.CreateBuilding(gridPosition, grid);
+        }
+    }
+
+    public void RemoveBuildingAt(Vector3 inputPosition)
+    {
+        Vector3 gridPosition = grid.CalculateGridPosition(inputPosition);
+        if (grid.IsCellTaken(gridPosition))
+        {
+            placementManager.RemoveBuilding(gridPosition, grid);
         }
     }
 }

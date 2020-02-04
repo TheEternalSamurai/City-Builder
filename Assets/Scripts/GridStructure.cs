@@ -51,6 +51,18 @@ public class GridStructure
             grid[cellIndex.y, cellIndex.x].SetConstruction(structure);
     }
 
+    public GameObject GetStructureFromGrid(Vector3 gridPosition)
+    {
+        var cellIndex = CalculateGridIndex(gridPosition);
+        return grid[cellIndex.y, cellIndex.x].GetStructure();
+    }
+
+    public void RemoveStructureFromGrid(Vector3 gridPosition)
+    {
+        var cellIndex = CalculateGridIndex(gridPosition);
+        grid[cellIndex.y, cellIndex.x].RemoveStructure();
+    }
+
     private bool CheckIndexValidity(Vector2Int cellIndex)
     {
         return cellIndex.x >= 0 && cellIndex.x < grid.GetLength(1) && cellIndex.y >= 0 && cellIndex.y < grid.GetLength(0);
