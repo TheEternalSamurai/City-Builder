@@ -6,13 +6,14 @@ using UnityEngine.EventSystems;
 
 public class InputManager : MonoBehaviour, IInputManager
 {
-    public LayerMask mouseInputMask;
-
+    private LayerMask mouseInputMask;
     private Action<Vector3> OnPointerSecondChangeHandler;
     private Action OnPointerSecondUpHandler;
     private Action<Vector3> OnPointerDownHandler;
     private Action OnPointerUpHandler;
     private Action<Vector3> OnPointerChangeHandler;
+
+    public LayerMask MouseInputMask { get => mouseInputMask; set => mouseInputMask = value; }
 
     void Update()
     {

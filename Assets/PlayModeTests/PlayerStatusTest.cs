@@ -10,7 +10,7 @@ namespace Tests
     [TestFixture]
     public class PlayerStatusTest
     {
-        UIController uIController;
+        UIController uiController;
         GameManager gameManagerComponent;
 
         [SetUp]
@@ -18,19 +18,23 @@ namespace Tests
         {
             GameObject gameManagerObject = new GameObject();
             var cameraMovementComponent = gameManagerObject.AddComponent<CameraMovement>();
-            gameManagerObject.AddComponent<InputManager>();
-            uIController = gameManagerObject.AddComponent<UIController>();
+
+            uiController = gameManagerObject.AddComponent<UIController>();
             GameObject buttonBuildObject = new GameObject();
             GameObject cancleButtonObject = new GameObject();
             GameObject canclePanel = new GameObject();
-            uIController.cancleActionBtn = cancleButtonObject.AddComponent<Button>();
+            uiController.cancleActionBtn = cancleButtonObject.AddComponent<Button>();
             var buttonBuildComponent = buttonBuildObject.AddComponent<Button>();
-            uIController.buildResidentialAreaBtn = buttonBuildComponent;
-            uIController.cancleActionPanel = cancleButtonObject;
+            uiController.buildResidentialAreaBtn = buttonBuildComponent;
+            uiController.cancleActionPanel = cancleButtonObject;
+
+            uiController.buildingMenuPanel = canclePanel;
+            uiController.openBuildMenuBtn = uiController.cancleActionBtn;
+            uiController.demolishBtn = uiController.cancleActionBtn;
 
             gameManagerComponent = gameManagerObject.AddComponent<GameManager>();
             gameManagerComponent.cameraMovement = cameraMovementComponent;
-            gameManagerComponent.uiController = uIController;
+            gameManagerComponent.uiController = uiController;
         }
 
         [UnityTest]
@@ -38,7 +42,7 @@ namespace Tests
         {
             yield return new WaitForEndOfFrame(); //Calls Awake
             yield return new WaitForEndOfFrame(); //Calls Start
-            uIController.buildResidentialAreaBtn.onClick.Invoke();
+            uiController.buildResidentialAreaBtn.onClick.Invoke();
             yield return new WaitForEndOfFrame();
             Assert.IsTrue(gameManagerComponent.State is PlayerBuildingSingleStructureState);
             yield return null;
