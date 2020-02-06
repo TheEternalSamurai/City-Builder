@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
+    public StructureRepository structureRepository;
     public Button buildResidentialAreaBtn;
     public Button cancleActionBtn;
     public GameObject cancleActionPanel;
+
     public GameObject buildingMenuPanel;
     public Button openBuildMenuBtn;
     public Button demolishBtn;
@@ -18,7 +21,7 @@ public class UIController : MonoBehaviour
     public GameObject roadsPanel;
     public Button closeBuildMenuBtn;
 
-    public GameObject builtButtonPrefab;
+    public GameObject buildButtonPrefab;
 
     private Action OnBuildAreaHandler;
     private Action OnCancleActionHandler;
@@ -55,21 +58,39 @@ public class UIController : MonoBehaviour
 
     private void PrepareBuildMenu()
     {
-        CreateButtonsInPanel(zonesPanel.transform);
-        CreateButtonsInPanel(facilitiesPanel.transform);
-        CreateButtonsInPanel(roadsPanel.transform);
+        CreateButtonsInPanel(zonesPanel.transform, structureRepository.GetZoneNames());
+        CreateButtonsInPanel(facilitiesPanel.transform, structureRepository.GetSingleStructureNames());
+        CreateButtonsInPanel(roadsPanel.transform, new List<string>() { structureRepository.GetRoadStructureName() });
     }
 
-    private void CreateButtonsInPanel(Transform panelTransform)
+    private void CreateButtonsInPanel(Transform panelTransform, List<string> dataToShow)
     {
-        foreach(Transform child in panelTransform)
+        if (dataToShow.Count > panelTransform.childCount)
         {
-            var button = child.GetComponent<Button>();
+            int quantityDifference = dataToShow.Count - panelTransform.childCount;
+            for (int i = 0; i < quantityDifference; i++)
+            {
+                Instantiate(buildButtonPrefab, panelTransform);
+            }
+        }
+        for (int i = 0; i < panelTransform.childCount; i++)
+        {
+            var button = panelTransform.GetChild(i).GetComponent<Button>();
             if (button != null)
             {
+                button.GetComponentInChildren<TextMeshProUGUI>().text = dataToShow[i];
                 button.onClick.AddListener(OnBuildAreaCallback);
             }
         }
+
+        //foreach (transform child in paneltransform)
+        //{
+        //    var button = child.getcomponent<button>();
+        //    if (button != null)
+        //    {
+        //        button.onclick.addlistener(onbuildareacallback);
+        //    }
+        //}
     }
 
     private void OnBuildAreaCallback()
