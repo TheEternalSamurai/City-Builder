@@ -13,7 +13,7 @@ public class PlayerRemoveBuildingState : PlayerState
 
     public override void OnCancle()
     {
-        this.gameManager.TransistionToState(this.gameManager.selectionState);
+        this.gameManager.TransistionToState(this.gameManager.selectionState, null);
     }
 
     public override void OnInputPanChange(Vector3 position)

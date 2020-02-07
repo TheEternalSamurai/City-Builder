@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour
 
     private void StartDemolishMode()
     {
-        TransistionToState(demolishState);
+        TransistionToState(demolishState, null);
     }
 
     private void HandlePointerChange(Vector3 position)
@@ -87,9 +87,9 @@ public class GameManager : MonoBehaviour
         state.OnInputPanChange(position);
     }
 
-    private void StartPlacementMode()
+    private void StartPlacementMode(string variable)
     {
-        TransistionToState(buildingSingleStructureState);
+        TransistionToState(buildingSingleStructureState, variable);
     }
 
     private void CancleAction()
@@ -102,9 +102,9 @@ public class GameManager : MonoBehaviour
         state.OnInputPointerDown(position);
     }
 
-    public void TransistionToState(PlayerState newState)
+    public void TransistionToState(PlayerState newState, string variable)
     {
         this.state = newState;
-        this.state.EnterState();
+        this.state.EnterState(variable);
     }
 }
