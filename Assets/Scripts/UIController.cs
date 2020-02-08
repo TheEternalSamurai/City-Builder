@@ -62,7 +62,7 @@ public class UIController : MonoBehaviour
     {
         CreateButtonsInPanel(zonesPanel.transform, structureRepository.GetZoneNames(), OnBuildAreaCallback);
         CreateButtonsInPanel(facilitiesPanel.transform, structureRepository.GetSingleStructureNames(), OnBuildSingleStructureCallback);
-        CreateButtonsInPanel(roadsPanel.transform, new List<string>() { structureRepository.GetRoadStructureName() }, OnBuildSingleStructureCallback);
+        CreateButtonsInPanel(roadsPanel.transform, new List<string>() { structureRepository.GetRoadStructureName() }, OnBuildRoadCallback);
     }
 
     private void CreateButtonsInPanel(Transform panelTransform, List<string> dataToShow, Action<string> callback)

@@ -11,11 +11,30 @@ public abstract class PlayerState
 		this.gameManager = gameManager;
 	}
 
-	public abstract void OnInputPointerDown(Vector3 position);
-	public abstract void OnInputPointerChange(Vector3 position);
-	public abstract void OnInputPointerUp();
-	public abstract void OnInputPanChange(Vector3 position);
-	public abstract void OnInputPanUp();
+	public virtual void OnInputPointerDown(Vector3 position) { }
+	public virtual void OnInputPointerChange(Vector3 position) { }
+	public virtual void OnInputPointerUp() { }
+	public virtual void OnInputPanChange(Vector3 position) { }
+	public virtual void OnInputPanUp() { }
 	public virtual void EnterState(string variable) { }
-	public abstract void OnCancle();
+    public virtual void OnBuildArea(string structureName)
+    {
+        gameManager.TransistionToState(gameManager.buildingAreaState, structureName);
+    }
+
+    public virtual void OnBuildSingleStructure(string structureName)
+    {
+        gameManager.TransistionToState(gameManager.buildingSingleStructureState, structureName);
+    }
+
+    public virtual void OnBuildRoad(string structureName)
+    {
+        gameManager.TransistionToState(gameManager.buildingRoadState, structureName);
+    }
+
+    public virtual void OnDemolishAction()
+    {
+        gameManager.TransistionToState(gameManager.demolishState, null);
+    }
+    public abstract void OnCancle();
 }

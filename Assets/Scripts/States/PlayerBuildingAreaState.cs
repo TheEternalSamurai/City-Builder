@@ -2,19 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerBuildingSingleStructureState : PlayerState
+public class PlayerBuildingAreaState : PlayerState
 {
     private BuildingManager buildingManager;
     private string structureName;
 
-    public PlayerBuildingSingleStructureState(GameManager gameManager, BuildingManager buildingManager) : base(gameManager)
+    public PlayerBuildingAreaState(GameManager gameManager, BuildingManager buildingManager) : base(gameManager)
     {
         this.buildingManager = buildingManager;
-    }
-
-    public override void OnInputPointerDown(Vector3 position)
-    {
-        this.buildingManager.PlaceStructureAt(position);
     }
 
     public override void OnCancle()
@@ -25,5 +20,15 @@ public class PlayerBuildingSingleStructureState : PlayerState
     public override void EnterState(string structureName)
     {
         this.structureName = structureName;
+    }
+
+    public override void OnInputPointerDown(Vector3 position)
+    {
+        this.buildingManager.PlaceStructureAt(position);
+    }
+
+    public override void OnDemolishAction()
+    {
+        gameManager.TransistionToState(gameManager.demolishState, structureName);
     }
 }

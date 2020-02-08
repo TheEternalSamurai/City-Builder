@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerRemoveBuildingState : PlayerState
+public class PlayerBuildingRoadState : PlayerState
 {
     private BuildingManager buildingManager;
+    private string structureName;
 
-    public PlayerRemoveBuildingState(GameManager gameManager, BuildingManager buildingManager) : base(gameManager)
+    public PlayerBuildingRoadState(GameManager gameManager, BuildingManager buildingManager) : base(gameManager)
     {
         this.buildingManager = buildingManager;
     }
@@ -18,6 +19,11 @@ public class PlayerRemoveBuildingState : PlayerState
 
     public override void OnInputPointerDown(Vector3 position)
     {
-        this.buildingManager.RemoveBuildingAt(position);
+        this.buildingManager.PlaceStructureAt(position);
+    }
+
+    public override void EnterState(string structureName)
+    {
+        this.structureName = structureName;
     }
 }
