@@ -7,19 +7,22 @@ public class BuildingManager
 {
     private GridStructure grid;
     private PlacementManager placementManager;
+    private StructureRepository structureRepository;
 
-    public BuildingManager(int cellSize, int width, int length, PlacementManager placementManager)
+    public BuildingManager(int cellSize, int width, int length, PlacementManager placementManager, StructureRepository structureRepository)
     {
         this.grid = new GridStructure(cellSize, width, length);
         this.placementManager = placementManager;
+        this.structureRepository = structureRepository;
     }
 
-    public void PlaceStructureAt(Vector3 inputPosition)
+    public void PlaceStructureAt(Vector3 inputPosition, string structureName, StructureType structureType)
     {
+        GameObject buildingPrefab = structureRepository.GetBuildingPrefabByName(structureName, structureType);
         Vector3 gridPosition = grid.CalculateGridPosition(inputPosition);
         if (!grid.IsCellTaken(gridPosition))
         {
-            placementManager.CreateBuilding(gridPosition, grid);
+            placementManager.CreateBuilding(gridPosition, grid, buildingPrefab);
         }
     }
 

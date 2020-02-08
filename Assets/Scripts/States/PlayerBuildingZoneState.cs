@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerBuildingAreaState : PlayerState
+public class PlayerBuildingZoneState : PlayerState
 {
     private BuildingManager buildingManager;
     private string structureName;
 
-    public PlayerBuildingAreaState(GameManager gameManager, BuildingManager buildingManager) : base(gameManager)
+    public PlayerBuildingZoneState(GameManager gameManager, BuildingManager buildingManager) : base(gameManager)
     {
         this.buildingManager = buildingManager;
     }
@@ -24,7 +24,7 @@ public class PlayerBuildingAreaState : PlayerState
 
     public override void OnInputPointerDown(Vector3 position)
     {
-        this.buildingManager.PlaceStructureAt(position);
+        this.buildingManager.PlaceStructureAt(position, structureName, StructureType.Zone);
     }
 
     public override void OnDemolishAction()
